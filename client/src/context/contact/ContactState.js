@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import contactContext from "./contactContext";
+import ContactContext from "./contactContext";
 import contactReducer from "./contactReducer";
 import {
   ADD_CONTACT,
@@ -8,10 +8,10 @@ import {
   CLEAR_CURRENT,
   UPDATE_CONTACT,
   FILTER_CONTACTS,
-  CLEAR_FILTER
+  CLEAR_FILTER,
 } from "../types";
 
-const ContactState = props => {
+const ContactState = (props) => {
   const initialState = {
     contacts: [
       {
@@ -19,42 +19,42 @@ const ContactState = props => {
         name: "Jill",
         email: "jill@xxx.com",
         phone: "111-111-2222",
-        type: "personal"
+        type: "personal",
       },
       {
         id: 2,
         name: "Sara",
         email: "Sara@xxx.com",
         phone: "111-111-2222",
-        type: "personal"
+        type: "personal",
       },
       {
         id: 3,
         name: "Harry",
         email: "Harry@xxx.com",
         phone: "111-111-2222",
-        type: "professional"
-      }
+        type: "professional",
+      },
     ],
     current: null,
-    filtered: null
+    filtered: null,
   };
 
   const [state, dispatch] = useReducer(contactReducer, initialState);
 
   // Add Contact
-  const addContact = contact => {
+  const addContact = (contact) => {
     contact.id = new Date().valueOf();
     dispatch({ type: ADD_CONTACT, payload: contact });
   };
 
   // Delete Cotanct
-  const deleteContact = id => {
+  const deleteContact = (id) => {
     dispatch({ type: DELETE_CONTACT, payload: id });
   };
 
   // Set Current Contact
-  const setCurrent = contact => {
+  const setCurrent = (contact) => {
     dispatch({ type: SET_CURRENT, payload: contact });
   };
 
@@ -64,12 +64,12 @@ const ContactState = props => {
   };
 
   // Update Contact
-  const updateContact = contact => {
+  const updateContact = (contact) => {
     dispatch({ type: UPDATE_CONTACT, payload: contact });
   };
 
   // Filter Contacts
-  const filterContacts = text => {
+  const filterContacts = (text) => {
     dispatch({ type: FILTER_CONTACTS, payload: text });
   };
 
@@ -79,7 +79,7 @@ const ContactState = props => {
   };
 
   return (
-    <contactContext.Provider
+    <ContactContext.Provider
       value={{
         contacts: state.contacts,
         current: state.current,
@@ -90,11 +90,11 @@ const ContactState = props => {
         clearCurrent,
         updateContact,
         filterContacts,
-        clearFilter
+        clearFilter,
       }}
     >
       {props.children}
-    </contactContext.Provider>
+    </ContactContext.Provider>
   );
 };
 
